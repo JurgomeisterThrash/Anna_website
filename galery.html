@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Галерея разрушительных работ Анны Ле - передовой опыт в анальной стоматологии">
+    <meta name="keywords" content="примеры работ, разрушение зубов, стоматология, до и после">
+    <meta property="og:title" content="Галерея работ | Анна Ле - Стоматолог-ящперица">
+    <meta property="og:description" content="Лучшие примеры зубного хаоса и анальной стоматологии">
+    <title>Галерея работ | Анна Ле</title>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Главная</a></li>
+            <li><a href="about.html" class="nav-link">Обо мне</a></li>
+            <li><a href="index.html#contacts" class="nav-link">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <section class="gallery-section">
+        <h2 data-aos="fade-down">Архив разрушений</h2>
+        <div class="gallery-container">
+            <div class="gallery-item" data-aos="zoom-in">
+                <img src="work1-thumb.jpg" class="thumb-img" alt="Полное уничтожение зубного ряда">
+            </div>
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="work2-thumb.jpg" class="thumb-img" alt="Инновационный кривой прикус">
+            </div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+        <button class="nav-button prev" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-button next" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

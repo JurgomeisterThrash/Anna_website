@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Галерея разрушительных работ Анны Ле - передовой опыт в анальной стоматологии">
+    <meta name="keywords" content="примеры работ, разрушение зубов, стоматология, до и после">
+    <meta property="og:title" content="Галерея работ | Анна Ле - Стоматолог-ящперица">
+    <meta property="og:description" content="Лучшие примеры зубного хаоса и анальной стоматологии">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Работы по уничтожению зубов",
+        "description": "Коллекция уникальных случаев из практики",
+        "image": ["work1-full.jpg", "work2-full.jpg"]
+    }
+    </script>
+
+    <title>Галерея работ | Анна Ле</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --light-1: #ffffff;
+            --light-2: #fff5f5;
+            --light-3: #ffe5e5;
+            --accent: #ff1a1a;
+            --accent-dark: #cc0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-1);
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-dark);
+            text-align: center;
+        }
+
+        /* Навигация */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--accent-dark);
+            text-decoration: none;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Основной контент */
+        .gallery-section {
+            padding: 8rem 2rem;
+            position: relative;
+            min-height: 80vh;
+            background: var(--light-2);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            transition: transform 0.3s;
+            background: var(--light-1);
+            border: 3px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(255,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255,26,26,0.2);
+        }
+
+        .thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.5);
+            transition: filter 0.3s;
+        }
+
+        .gallery-item:hover .thumb-img {
+            filter: grayscale(5);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.97);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            display: flex;
+            height: auto;
+            min-height: 100vh;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0rem 0;
+        }
+
+        .slide {
+            min-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .full-img-container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .full-img {
+            width: 100%;
+            height: auto;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+        }
+
+        .modal-text {
+            max-width: 95%;
+            padding: 2rem;
+            margin: 0rem auto;
+            background: var(--light-1);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #444;
+            border: 2px solid var(--accent);
+        }
+
+        .nav-button {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,26,26,0.2);
+            border: none;
+            color: var(--accent-dark);
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-button:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .prev { left: 2rem; }
+        .next { right: 2rem; }
+
+        .close-btn {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            color: var(--accent);
+            font-size: 3rem;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2001;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 6rem 1rem;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .full-img-container {
+                padding: 1rem;
+            }
+            
+            .modal-text {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .nav-button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .close-btn {
+                top: 1rem;
+                right: 1rem;
+                font-size: 2.5rem;
+            }
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1.5rem auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Главная</a></li>
+        </ul>
+    </nav>
+
+    <section class="gallery-section">
+        <h2 data-aos="fade-down">Архив разрушений</h2>
+        <div class="gallery-container">
+            <div class="gallery-item" data-aos="zoom-in">
+                <img src="work1-thumb.jpg" class="thumb-img" alt="Полное уничтожение зубного ряда">
+            </div>
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="work2-thumb.jpg" class="thumb-img" alt="Инновационный кривой прикус">
+            </div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+        <button class="nav-button prev" onclick="changeSlide(-1)">❮</button>
+        <button class="nav-button next" onclick="changeSlide(1)">❯</button>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 120,
+            once: false,
+            mirror: true,
+            easing: 'ease-out-quad'
+        });
+
+        const cases = [
+            {
+                thumb: 'work1-thumb.jpg',
+                full: 'work1-full.jpg',
+                description: 'Экспресс-разрушение за 15 минут. Применялись: кувалда, напильник и полное отсутствие анестезии. Результат: пожизненная потребность в протезировании.'
+            },
+            {
+                thumb: 'work2-thumb.jpg',
+                full: 'work2-full.jpg',
+                description: 'Патологический прикус по инновационной методике. Гарантированные проблемы: мигрени, нарушение пищеварения, социальная изоляция.'
+            }
+        ];
+
+        let currentIndex = 0;
+        let isModalOpen = false;
+
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.addEventListener('click', () => openModal(index));
+        });
+
+        function openModal(index) {
+            currentIndex = index;
+            isModalOpen = true;
+            history.pushState({ modal: true }, '', '#modal');
+            updateModalContent();
+            document.getElementById('modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            isModalOpen = false;
+            if (history.state?.modal) history.back();
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalContent() {
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = cases.map((c, index) => `
+                <div class="slide" data-index="${index}">
+                    <div class="full-img-container">
+                        <img src="${c.full}" class="full-img" alt="${c.description}">
+                    </div>
+                    <div class="modal-text">${c.description}</div>
+                </div>
+            `).join('');
+            
+            modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function changeSlide(direction) {
+            currentIndex = (currentIndex + direction + cases.length) % cases.length;
+            document.getElementById('modalContent').style.transform = 
+                `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Закрытие по клику вне области
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Обработка истории браузера
+        window.addEventListener('popstate', function() {
+            if (isModalOpen) closeModal();
+        });
+    </script>
+</body>
+</html>

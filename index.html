@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Стоматолог-ящперица Анна Ле - 97 лет опыта в анальной стоматологии. Современное оборудование, безболезненные (нет) процедуры и гарантированное разрушение зубов.">
+    <meta name="keywords" content="стоматолог, ящперица, анальная стоматология, разрушение зубов, деревянные протезы">
+    <meta property="og:title" content="Анна Ле | Стоматолог-ящперица">
+    <meta property="og:description" content="Профессиональное уничтожение зубов с 1927 года">
+    <title>Анна Ле | Стоматолог-ящперица</title>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Dentist",
+        "name": "Анна Ле",
+        "image": "doctor-photo.jpg",
+        "description": "Стоматолог-ящперица с 97-летним стажем разрушения зубов",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Улица Пушкина, дом Колотушкина",
+            "addressLocality": "Новая Зеландия"
+        },
+        "telephone": "8 896 989-54-3"
+    }
+    </script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --light-1: #ebebeb;
+            --light-2: #d6d6d6;
+            --light-3: #f0eeee;
+            --accent: #da0000;
+            --accent-dark: #ac0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-1);
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Rubik Bubbles', ;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: var(--accent-dark);
+        }
+        .hero .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+    }
+        .sales-section {
+            background: var(--light-2);
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 5;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .sales-badge {
+            font-size: 2.5rem;
+            color: var(--accent);
+            text-shadow: 0 0 15px rgba(255,26,26,0.2);
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        .sales-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .sales-point {
+            padding: 1.5rem;
+            background: var(--light-1);
+            border-radius: 10px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 5px 15px rgba(255,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .sales-point:hover {
+            transform: translateY(-5px);
+        }
+
+        .footer {
+            background: var(--light-2);
+            padding: 1rem 1rem;
+            text-align: center;
+            border-top: 5px solid var(--accent);
+            font-family: 'Roboto Condensed', sans-serif;
+            position: relative;
+            z-index: 10;
+        }
+
+        .creator-info {
+            color: rgba(0,0,0,0.6);
+            margin-top: 0.1rem;
+            font-size: 0.8
+
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--accent);
+            z-index: 1000;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--light-1);
+            text-decoration: none;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 700;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--light-1);
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 3rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateZ(-1px) scale(1.2);
+            transition: transform 0.2s linear;
+            will-change: transform;
+            opacity: 0.3;
+        }
+
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(211, 211, 211, 0.014);
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+             z-index: 2;
+             max-width: 1200px;
+             width: 100%;
+             padding: 1rem;
+    
+        }
+
+        .doctor-photo {
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            margin: 3rem 0;
+            border: 8px solid var(--accent);
+            box-shadow: 0 0 40px rgba(255,26,26,0.2);
+            transition: transform 0.3s;
+            background: var(--light-1);
+            display: block;
+        }
+
+        .doctor-photo:hover {
+            transform: scale(1.05);
+        }
+        .subtitle {
+            text-align: center;
+            width: 100%;
+            margin-top: -1rem;
+        }
+
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 2rem 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .gallery-item {
+            scroll-snap-align: start;
+            min-width: 70%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid var(--accent);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--light-1);
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(255,0,0,0.1);
+        }
+
+        .why-list {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .why-list li {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .why-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .contacts {
+            display: grid;
+            gap: 2rem;
+            margin-top: 4rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            background: var(--light-1);
+            color: var(--accent-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            box-shadow: 0 5px 15px rgba(255,0,0,0.1);
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 20px rgba(255,0,0,0.2);
+        }
+
+        .address {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--light-2);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
+
+        @media (max-width: 768px) {
+            .nav-list {
+                gap: 2rem;
+                font-size: 1rem;
+            }
+            
+            .doctor-photo {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .section {
+                padding: 5rem 1rem;
+            }
+            
+            .gallery-item {
+                min-width: 90%;
+                height: 300px;
+            }
+            
+            .btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .sales-badge {
+                font-size: 1.8rem;
+            }
+            
+            .sales-points {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a class="nav-link" href="#hero">Главная</a></li>
+            <li><a class="nav-link" href="#about">Обо мне</a></li>
+            <li><a class="nav-link" href="#contacts">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <section class="sales-section" id="sales" data-aos="fade-up">
+        <div class="content">
+            <h2>Почему выбирают именно нас?</h2>
+            <div class="sales-badge">🔥 #1 В Разрушении Зубов 🔥</div>
+            <div class="sales-points">
+                <div class="sales-point" data-aos="zoom-in">
+                    <h3>Гарантия 146%</h3>
+                    <p>Если ваши зубы не разрушатся за 2 недели - вернём деньги!</p>
+                </div>
+                <div class="sales-point" data-aos="zoom-in" data-aos-delay="200">
+                    <h3>Опыт предков</h3>
+                    <p>Методики 18 века, проверенные временем и миллионами пациентов</p>
+                </div>
+                <div class="sales-point" data-aos="zoom-in" data-aos-delay="400">
+                    <h3>Никакой анестезии</h3>
+                    <p>Наслаждайтесь полным спектром ощущений!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hero" id="hero">
+        <div class="parallax-bg" style="background-image: url('dentist-bg1.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="content">
+            <h1 data-aos="fade-down">Анна Ле</h1>
+            <img src="doctor-photo.jpg" alt="Фото врача" class="doctor-photo" data-aos="zoom-in">
+            <p data-aos="fade-up" class="subtitle">Анальная стоматологическая помощь</p>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="parallax-bg" style="background-image: url('dentist-bg2.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="content" data-aos="fade-right">
+            <h2>Опыт и принципы работы</h2>
+            <p>97 лет практики в ведущих клиниках Новой Зеландии</p>
+            <div class="principles">
+                <ul class="why-list">
+                    <li>Наплевательский подход к лечению людей</li>
+                    <li>Современное, почти новое оборудование, которые высоко оценены генсеками СССР</li>
+                    <li>Болезненные процедуры</li>
+                </ul>
+            </div>
+            <a href="about.html" class="btn" style="margin-top: 2rem;">Подробнее</a>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <div class="parallax-bg" style="background-image: url('dentist-bg3.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="content" data-aos="fade-up">
+            <h2>Компетенции</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Травматическая стоматология</h3>
+                    <p>Распространение кариеса и разрушение зубов</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Ортоанальная стоматология</h3>
+                    <p>Устаревшее протезирование деревянными чопиками</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Эстетическая стоматология</h3>
+                    <p>Создание уродливой улыбки</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <div class="parallax-bg" style="background-image: url('dentist-bg5.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="content">
+            <h2 data-aos="fade-down">Примеры работ</h2>
+            <div class="gallery">
+                <div class="gallery-item" style="background-image: url('work1.jpg')" data-aos="zoom-in"></div>
+                <div class="gallery-item" style="background-image: url('work2.jpg')" data-aos="zoom-in"></div>
+                <div class="gallery-item" style="background-image: url('work3.jpg')" data-aos="zoom-in"></div>
+            </div>
+            <a href="gallery.html" class="btn" style="margin-top: 2rem;">Больше работ</a>
+        </div>
+    </section>
+
+    <section class="section" id="contacts">
+        <div class="parallax-bg" style="background-image: url('dentist-bg6.jpg')"></div>
+        <div class="section-overlay"></div>
+        <div class="content" data-aos="zoom-in">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contacts">
+                <a href="https://t.me/jurgomeister" class="btn telegram">
+                    <span class="icon">✉️</span> Telegram
+                </a>
+                <a href="https://wa.me/89969102522" class="btn whatsapp">
+                    <span class="icon">📱</span> WhatsApp
+                </a>
+            </div>
+            <div class="address">
+                <h3>Клиника "Мой дантист"</h3>
+                <p>📍 Улица Пушкина, дом Колотушкина</p>
+                <p>📞 Регистратура: <a href="tel:8896989543" class="phone-link">8 896 989-54-35</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="content">
+            <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
+            <div class="creator-info">
+                Сайт создан кровью и потом<br>
+                <a href="https://t.me/jurgomeister" style="color: var(--accent);">Гениальный верстальщик</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 120,
+            once: false,
+            mirror: true,
+            easing: 'ease-out-quad'
+        });
+        
+        const sections = document.querySelectorAll('.section');
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
+            entry.target.classList.add('active');
+        } else {
+            entry.target.classList.remove('active');
+        }
+    });
+}, { threshold: 0.5 });
+
+sections.forEach(section => observer.observe(section));
+
+        document.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            parallaxElements.forEach(bg => {
+                const rect = bg.getBoundingClientRect();
+                const speed = 1;
+                const yPos = -(rect.top * speed);
+                bg.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.2)`;
+            });
+        });
+
+        const gallery = document.querySelector('.gallery');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        gallery.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - gallery.offsetLeft;
+            scrollLeft = gallery.scrollLeft;
+            gallery.style.cursor = 'grabbing';
+        });
+
+        gallery.addEventListener('mouseleave', () => {
+            isDown = false;
+            gallery.style.cursor = 'grab';
+        });
+
+        gallery.addEventListener('mouseup', () => {
+            isDown = false;
+            gallery.style.cursor = 'grab';
+        });
+
+        gallery.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - gallery.offsetLeft;
+            const walk = (x - startX) * 2;
+            gallery.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body>
+</html>
