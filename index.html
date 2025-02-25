@@ -52,20 +52,39 @@
             line-height: 1.5;
         }
 
+        /* Новые стили для плавных переходов */
+        .parallax-bg {
+            transition: 
+                opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.2s linear;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .section.active .parallax-bg {
+            opacity: 0.3 !important;
+        }
+
+        .section:not(.active) .parallax-bg {
+            opacity: 0 !important;
+        }
+
         h1, h2, h3 {
-            font-family: 'Rubik Bubbles', ;
+            font-family: 'Rubik Bubbles';
             text-transform: uppercase;
             text-align: center;
             letter-spacing: 3px;
             margin-bottom: 1.5rem;
             color: var(--accent-dark);
         }
+
         .hero .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-    }
+        }
+
         .sales-section {
             background: var(--light-2);
             text-align: center;
@@ -118,8 +137,7 @@
         .creator-info {
             color: rgba(0,0,0,0.6);
             margin-top: 0.1rem;
-            font-size: 0.8
-
+            font-size: 0.8rem;
         }
 
         .nav {
@@ -186,9 +204,6 @@
             background-position: center;
             z-index: -1;
             transform: translateZ(-1px) scale(1.2);
-            transition: transform 0.2s linear;
-            will-change: transform;
-            opacity: 0.3;
         }
 
         .section-overlay {
@@ -203,11 +218,10 @@
 
         .content {
             position: relative;
-             z-index: 2;
-             max-width: 1200px;
-             width: 100%;
-             padding: 1rem;
-    
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            padding: 1rem;
         }
 
         .doctor-photo {
@@ -225,6 +239,7 @@
         .doctor-photo:hover {
             transform: scale(1.05);
         }
+
         .subtitle {
             text-align: center;
             width: 100%;
@@ -495,7 +510,7 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="footer">
         <div class="content">
             <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
             <div class="creator-info">
@@ -507,6 +522,31 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Система плавных переходов
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                entry.target.classList.toggle('active', entry.isIntersecting);
+            });
+        }, { 
+            threshold: 0.4,
+            rootMargin: '-100px 0px -100px 0px'
+        });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Оптимизированный параллакс
+        function updateParallax() {
+            document.querySelectorAll('.parallax-bg').forEach(bg => {
+                const rect = bg.getBoundingClientRect();
+                const yPos = -(rect.top * 0.15);
+                bg.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.2)`;
+            });
+            requestAnimationFrame(updateParallax);
+        }
+        updateParallax();
+
+        // Инициализация AOS
         AOS.init({
             duration: 800,
             offset: 120,
@@ -514,30 +554,8 @@
             mirror: true,
             easing: 'ease-out-quad'
         });
-        
-        const sections = document.querySelectorAll('.section');
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-            entry.target.classList.add('active');
-        } else {
-            entry.target.classList.remove('active');
-        }
-    });
-}, { threshold: 0.5 });
 
-sections.forEach(section => observer.observe(section));
-
-        document.addEventListener('scroll', () => {
-            const parallaxElements = document.querySelectorAll('.parallax-bg');
-            parallaxElements.forEach(bg => {
-                const rect = bg.getBoundingClientRect();
-                const speed = 1;
-                const yPos = -(rect.top * speed);
-                bg.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.2)`;
-            });
-        });
-
+        // Логика галереи
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
