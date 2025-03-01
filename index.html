@@ -26,7 +26,7 @@
     </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
     
     <style>
@@ -42,7 +42,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Oswald', sans-serif;
+            font-family: 'Rubik', sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -68,20 +68,25 @@
     }
        
         .footer {
-            background: var(--light-2);
-            padding: 1rem 1rem;
+            background: var(--accent);
+            padding: 3rem 1rem;
             text-align: center;
-            border-top: 5px solid var(--accent);
-            font-family: 'Roboto Condensed', sans-serif;
+            border-top: 5px solid var(--accent-dark);
+            font-family: 'Inter', sans-serif;
             position: relative;
             z-index: 10;
+            color: white;
+        }
+
+        .footer .content {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .creator-info {
-            color: rgba(0,0,0,0.6);
-            margin-top: 0.1rem;
-            font-size: 0.8
-
+            color: rgba(255,255,255,0.8);
+            margin-top: 1rem;
+            font-size: 0.8rem;
         }
 
         .nav {
@@ -275,8 +280,8 @@
             position: relative;
             overflow: hidden;
             border: 2px solid var(--accent);
-            background: var(--light-1);
-            color: var(--accent-dark);
+            background: var(--accent);
+            color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -286,9 +291,10 @@
         }
 
         .btn:hover {
-            background: var(--accent);
+            background: var(--accent-dark);
             color: white;
             box-shadow: 0 10px 20px rgba(255,0,0,0.2);
+            border-color: var(--accent-dark);
         }
 
         .address {
@@ -436,12 +442,12 @@
         </div>
     </section>
 
-    <footer>
+    <footer class="footer">
         <div class="content">
             <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
             <div class="creator-info">
                 Сайт создан кровью и потом<br>
-                <a href="https://t.me/jurgomeister" style="color: var(--accent);">Гениальный верстальщик</a>
+                <a href="https://t.me/jurgomeister" style="color: white;">Гениальный верстальщик</a>
             </div>
         </div>
     </footer>
