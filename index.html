@@ -26,7 +26,7 @@
     </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
     
     <style>
@@ -42,7 +42,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Rubik', sans-serif;
+            font-family: 'Oswald', sans-serif;
             scroll-behavior: smooth;
         }
 
@@ -53,28 +53,25 @@
         }
 
         h1, h2, h3 {
-            font-family: 'Rubik Bubbles', ;
+            font-family: 'Rubik Bubbles';
             text-transform: uppercase;
             text-align: center;
             letter-spacing: 3px;
             margin-bottom: 1.5rem;
             color: var(--accent-dark);
         }
+        
         .hero .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-    }
-       
-        .footer {
+        }
+
+        footer {
             background: var(--accent);
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
-            border-top: 5px solid var(--accent-dark);
-            font-family: 'Inter', sans-serif;
-            position: relative;
-            z-index: 10;
             color: white;
         }
 
@@ -85,10 +82,11 @@
 
         .creator-info {
             color: rgba(255,255,255,0.8);
-            margin-top: 1rem;
-            font-size: 0.8rem;
+            margin-top: 0.1rem;
+            font-size: 0.8em;
         }
 
+        /* Остальные стили без изменений */
         .nav {
             position: fixed;
             top: 0;
@@ -280,8 +278,8 @@
             position: relative;
             overflow: hidden;
             border: 2px solid var(--accent);
-            background: var(--accent);
-            color: white;
+            background: var(--light-1);
+            color: var(--accent-dark);
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -291,10 +289,9 @@
         }
 
         .btn:hover {
-            background: var(--accent-dark);
+            background: var(--accent);
             color: white;
             box-shadow: 0 10px 20px rgba(255,0,0,0.2);
-            border-color: var(--accent-dark);
         }
 
         .address {
@@ -447,7 +444,7 @@
             <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
             <div class="creator-info">
                 Сайт создан кровью и потом<br>
-                <a href="https://t.me/jurgomeister" style="color: white;">Гениальный верстальщик</a>
+                <a href="https://t.me/jurgomeister" style="color: rgba(255,255,255,0.8);">Гениальный верстальщик</a>
             </div>
         </div>
     </footer>
@@ -498,9 +495,4 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - gallery.offsetLeft;
-            const walk = (x - startX) * 2;
-            gallery.scrollLeft = scrollLeft - walk;
-        });
-    </script>
-</body>
-</html>
+            const walk = (x
