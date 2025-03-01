@@ -26,15 +26,14 @@
     </script>
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --light-1: #ebebeb;
             --light-2: #d6d6d6;
             --light-3: #f0eeee;
-            --accent: #da0000;
+            --accent: #ce1313;
             --accent-dark: #ac0000;
         }
 
@@ -48,17 +47,37 @@
 
         body {
             background-color: var(--light-1);
-            color: #333333;
+            color: #1b1b1b;
             line-height: 1.5;
         }
 
+        .global-parallax {
+
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300vh;
+            background: url('common-bg.jpg') center/cover repeat-y;
+            z-index: -2;
+            transform: translateZ(-1px) scale(1.1);
+            opacity: 0.3;
+            will-change: transform;
+        }
+
         h1, h2, h3 {
-            font-family: 'Rubik Bubbles';
+            font-family: 'Yanone Kaffeesatz';
             text-transform: uppercase;
             text-align: center;
             letter-spacing: 3px;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+        }
+        p {font-family: 'Yanone Kaffeesatz';
+            text-transform: uppercase;
+            letter-spacing: 3px;
             margin-bottom: 1.5rem;
-            color: var(--accent-dark);
+            font-size: 1.2rem;
         }
         
         .hero .content {
@@ -66,6 +85,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 4rem;
         }
 
         footer {
@@ -94,7 +114,7 @@
             z-index: 1000;
             padding: 1rem;
             backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         .nav-list {
@@ -107,7 +127,7 @@
         .nav-link {
             color: var(--light-1);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             position: relative;
             padding: 0.5rem 1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,22 +158,7 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .parallax-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 400vh;
-            background-size: cover;
-            background-position: center;
-            background-image: url('common-bg.jpg');
-            z-index: -1;
-            transform: translateZ(-1px) scale(1.2);
-            transition: transform 0.2s linear;
-            will-change: transform;
-            opacity: 0.3;
+            background: transparent;
         }
 
         .section-overlay {
@@ -162,8 +167,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(211, 211, 211, 0.014);
-            z-index: 0;
+            background: rgba(255, 255, 255, 0);
+            z-index: -1;
         }
 
         .content {
@@ -173,14 +178,33 @@
              width: 100%;
              padding: 1rem;
         }
+        .why-list {
+            list-style: none;
+            margin-top: 3rem;
+        }
 
+        .why-list li {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.6rem;
+            color: #000000;
+        }
+
+        .why-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.6rem;
+        }
         .doctor-photo {
             width: 500px;
             height: 500px;
             border-radius: 50%;
             margin: 3rem 0;
             border: 8px solid var(--accent);
-            box-shadow: 0 0 40px rgba(255,26,26,0.2);
+            box-shadow: 0 3px 40px rgba(255,26,26,1);
             transition: transform 0.3s;
             background: var(--light-1);
             display: block;
@@ -206,13 +230,12 @@
 
         .gallery-item {
             scroll-snap-align: start;
-            min-width: 70%;
-            height: 500px;
+            min-width: 65%;
+            height: 450px;
             background-size: cover;
             background-position: center;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 3px solid var(--accent);
+            border: 1px solid var(--accent);
         }
 
         .skills-grid {
@@ -225,35 +248,14 @@
         .skill-card {
             background: var(--light-1);
             padding: 2rem;
-            border-left: 4px solid var(--accent);
+            border-left: 9px solid var(--accent);
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
         }
 
         .skill-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(255,0,0,0.1);
-        }
-
-        .why-list {
-            list-style: none;
-            margin-top: 3rem;
-        }
-
-        .why-list li {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.2rem;
-            color: #444;
-        }
-
-        .why-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-size: 1.5rem;
         }
 
         .contacts {
@@ -284,7 +286,7 @@
             align-items: center;
             justify-content: center;
             gap: 1rem;
-            box-shadow: 0 5px 15px rgba(255,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(255,0,0,0.2);
         }
 
         .btn:hover {
@@ -296,7 +298,7 @@
         .address {
             margin-top: 3rem;
             padding: 2rem;
-            background: var(--light-2);
+            background: rgba(218, 23, 88, 0.2);
             border-left: 4px solid var(--accent);
             border-radius: 10px;
         }
@@ -346,6 +348,7 @@
     </style>
 </head>
 <body>
+
     <nav class="nav">
         <ul class="nav-list">
             <li><a class="nav-link" href="#hero">Главная</a></li>
@@ -355,7 +358,6 @@
     </nav>
 
     <section class="section hero" id="hero">
-        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content">
             <h1 data-aos="fade-down">Анна Ле</h1>
@@ -365,7 +367,6 @@
     </section>
 
     <section class="section" id="about">
-        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="fade-right">
             <h2>Опыт и принципы работы</h2>
@@ -382,7 +383,6 @@
     </section>
 
     <section class="section" id="skills">
-        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="fade-up">
             <h2>Компетенции</h2>
@@ -404,7 +404,6 @@
     </section>
 
     <section class="section" id="gallery">
-        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content">
             <h2 data-aos="fade-down">Примеры работ</h2>
@@ -418,7 +417,6 @@
     </section>
 
     <section class="section" id="contacts">
-        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="zoom-in">
             <h2>Свяжитесь со мной</h2>
@@ -447,6 +445,7 @@
             </div>
         </div>
     </footer>
+    <div class="global-parallax"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -458,16 +457,16 @@
             easing: 'ease-out-quad'
         });
 
+        // Обновленный параллакс
         document.addEventListener('scroll', () => {
-            const parallaxElements = document.querySelectorAll('.parallax-bg');
-            parallaxElements.forEach(bg => {
-                const rect = bg.getBoundingClientRect();
-                const speed = 1;
-                const yPos = -(rect.top * speed);
-                bg.style.transform = `translate3d(0, ${yPos}px, 0) scale(1.2)`;
-            });
+            const parallax = document.querySelector('.global-parallax');
+            const scrollY = window.pageYOffset;
+            const speed = 0.5;
+            
+            parallax.style.transform = `translate3d(0, ${-scrollY * speed}px, 0) scale(1.2)`;
         });
 
+        // Остальной JavaScript без изменений
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
