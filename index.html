@@ -86,7 +86,6 @@
             font-size: 0.8em;
         }
 
-        /* Остальные стили без изменений */
         .nav {
             position: fixed;
             top: 0;
@@ -146,9 +145,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 400vh;
             background-size: cover;
             background-position: center;
+            background-image: url('common-bg.jpg');
             z-index: -1;
             transform: translateZ(-1px) scale(1.2);
             transition: transform 0.2s linear;
@@ -172,7 +172,6 @@
              max-width: 1200px;
              width: 100%;
              padding: 1rem;
-    
         }
 
         .doctor-photo {
@@ -356,7 +355,7 @@
     </nav>
 
     <section class="section hero" id="hero">
-        <div class="parallax-bg" style="background-image: url('dentist-bg1.jpg')"></div>
+        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content">
             <h1 data-aos="fade-down">Анна Ле</h1>
@@ -366,7 +365,7 @@
     </section>
 
     <section class="section" id="about">
-        <div class="parallax-bg" style="background-image: url('dentist-bg2.jpg')"></div>
+        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="fade-right">
             <h2>Опыт и принципы работы</h2>
@@ -383,7 +382,7 @@
     </section>
 
     <section class="section" id="skills">
-        <div class="parallax-bg" style="background-image: url('dentist-bg3.jpg')"></div>
+        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="fade-up">
             <h2>Компетенции</h2>
@@ -405,7 +404,7 @@
     </section>
 
     <section class="section" id="gallery">
-        <div class="parallax-bg" style="background-image: url('dentist-bg5.jpg')"></div>
+        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content">
             <h2 data-aos="fade-down">Примеры работ</h2>
@@ -419,7 +418,7 @@
     </section>
 
     <section class="section" id="contacts">
-        <div class="parallax-bg" style="background-image: url('dentist-bg6.jpg')"></div>
+        <div class="parallax-bg"></div>
         <div class="section-overlay"></div>
         <div class="content" data-aos="zoom-in">
             <h2>Свяжитесь со мной</h2>
@@ -495,4 +494,9 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - gallery.offsetLeft;
-            const walk = (x
+            const walk = (x - startX) * 2;
+            gallery.scrollLeft = scrollLeft - walk;
+        });
+    </script>
+</body>
+</html>
