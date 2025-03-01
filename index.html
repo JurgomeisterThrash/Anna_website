@@ -52,7 +52,6 @@
         }
 
         .global-parallax {
-
             position: fixed;
             top: 0;
             left: 0;
@@ -73,7 +72,8 @@
             margin-bottom: 1.2rem;
             color: var(--accent);
         }
-        p {font-family: 'Yanone Kaffeesatz';
+        p {
+            font-family: 'Yanone Kaffeesatz';
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 1.5rem;
@@ -173,10 +173,10 @@
 
         .content {
             position: relative;
-             z-index: 2;
-             max-width: 1200px;
-             width: 100%;
-             padding: 1rem;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+            padding: 1rem;
         }
         .why-list {
             list-style: none;
@@ -457,7 +457,7 @@
             easing: 'ease-out-quad'
         });
 
-        // Обновленный параллакс
+        // Параллакс-эффект
         document.addEventListener('scroll', () => {
             const parallax = document.querySelector('.global-parallax');
             const scrollY = window.pageYOffset;
@@ -466,7 +466,102 @@
             parallax.style.transform = `translate3d(0, ${-scrollY * speed}px, 0) scale(1.2)`;
         });
 
-        // Остальной JavaScript без изменений
+        // Скролл-контроль для мобильных устройств
+        let isScrolling = false;
+        let sections = [];
+        let sectionPositions = [];
+        let startY = 0;
+
+        function initSections() {
+            sections = Array.from(document.querySelectorAll('.section'));
+            sectionPositions = sections.map(section => section.offsetTop);
+        }
+
+        function findCurrentSection(scrollPos) {
+            for (let i = 0; i < sectionPositions.length; i++) {
+                if (scrollPos < sectionPositions[i] + sections[i].offsetHeight / 2) {
+                    return i;
+                }
+            }
+            return sections.length - 1;
+        }
+
+        function smoothScrollTo(target, duration) {
+            const start = window.pageYOffset;
+            const distance = target - start;
+            let startTime = null;
+
+            return new Promise(resolve => {
+                function animate(currentTime) {
+                    if (!startTime) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    window.scrollTo(0, start + distance * progress);
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        resolve();
+                    }
+                }
+                requestAnimationFrame(animate);
+            });
+        }
+
+        function isMobile() {
+            return window.innerWidth <= 768 && ('ontouchstart' in window);
+        }
+
+        function handleScrollDirection(direction) {
+            if (isScrolling) return;
+            isScrolling = true;
+
+            const currentScroll = window.pageYOffset;
+            const currentSectionIndex = findCurrentSection(currentScroll);
+            let targetIndex = currentSectionIndex + direction;
+
+            if (targetIndex < 0) targetIndex = 0;
+            if (targetIndex >= sections.length) targetIndex = sections.length - 1;
+
+            const targetPosition = sectionPositions[targetIndex];
+
+            smoothScrollTo(targetPosition, 500).then(() => {
+                isScrolling = false;
+            });
+        }
+
+        // Инициализация секций
+        initSections();
+        window.addEventListener('resize', initSections);
+
+        // Обработчики событий скролла
+        window.addEventListener('wheel', function(e) {
+            if (!isMobile()) return;
+            const isGalleryScroll = e.target.closest('.gallery');
+            if (isGalleryScroll) return;
+
+            e.preventDefault();
+            const direction = e.deltaY > 0 ? 1 : -1;
+            handleScrollDirection(direction);
+        }, { passive: false });
+
+        window.addEventListener('touchstart', function(e) {
+            if (!isMobile()) return;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', function(e) {
+            if (!isMobile()) return;
+            const isGalleryScroll = e.target.closest('.gallery');
+            if (isGalleryScroll) return;
+
+            e.preventDefault();
+            const currentY = e.touches[0].clientY;
+            const deltaY = startY - currentY;
+            const direction = deltaY > 0 ? 1 : -1;
+            handleScrollDirection(direction);
+        }, { passive: false });
+
+        // Оригинальный код для галереи
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
