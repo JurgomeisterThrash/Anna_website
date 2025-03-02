@@ -487,8 +487,16 @@
             
             // Анимация для верхнего слоя
             overlay.style.transform = `translate3d(0, ${-scrollY * 1.7}px, 0)`;
+            
         });
 
+        function onScroll() {
+        lastScroll = window.pageYOffset;
+        if (!ticking) {
+            window.requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+        }
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
