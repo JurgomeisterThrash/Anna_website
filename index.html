@@ -490,13 +490,26 @@
             
         });
 
+        if ('ontouchstart' in window) {
+        // Для мобильных - облегченная версия
+        window.addEventListener('scroll', onScroll, supportsPassive);
+        document.body.style.webkitOverflowScrolling = 'auto'; // Отключаем инерцию скролла
+    } else {
+        // Для десктопов - полная версия
+        window.addEventListener('scroll', onScroll, supportsPassive);
+    }
+
+    // Добавляем ресайз-хендлер
+    window.addEventListener('resize', () => {
+        parallaxLayers.forEach(layer => layer.style.transform = 'translateZ(0)');
+    });
+
         function onScroll() {
         lastScroll = window.pageYOffset;
         if (!ticking) {
             window.requestAnimationFrame(updateParallax);
             ticking = true;
-        }
-        }
+        }}
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
