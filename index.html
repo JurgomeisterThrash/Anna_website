@@ -33,8 +33,9 @@
             --light-1: #ebebeb;
             --light-2: #d6d6d6;
             --light-3: #f0eeee;
-            --accent: #ce1313;
-            --accent-dark: #ac0000;
+            --accent: #d61818;
+            --accent-dark: #910404;
+            --accent-light: #ff1c1c;
         }
 
         * {
@@ -57,11 +58,26 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 300vh;
-            background: url('common-bg.jpg') center/cover repeat-y;
+            height: 600vh;
+            background: url('background1.jpg') center/cover repeat-y;
             z-index: -2;
-            transform: translateZ(-1px) scale(1.1);
-            opacity: 0.3;
+            transform: translateZ(-1px) scale(1);
+            opacity: 0.45;
+            will-change: transform;
+        }
+
+        .parallax-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 800vh;
+            background: url('overlay.png') center/cover repeat;
+            opacity: 1;
+            z-index: 999;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            transform: translateZ(0);
             will-change: transform;
         }
 
@@ -72,12 +88,14 @@
             letter-spacing: 3px;
             margin-bottom: 1.2rem;
             color: var(--accent);
+            text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.356);
         }
         p {font-family: 'Yanone Kaffeesatz';
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 1.5rem;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.356);
         }
         
         .hero .content {
@@ -440,12 +458,13 @@
         <div class="content">
             <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
             <div class="creator-info">
-                Сайт создан кровью и потом<br>
+                Сайт создан из богохульных побуждений<br>
                 <a href="https://t.me/jurgomeister" style="color: rgba(255,255,255,0.8);">Гениальный верстальщик</a>
             </div>
         </div>
     </footer>
     <div class="global-parallax"></div>
+    <div class="parallax-overlay"></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -457,16 +476,19 @@
             easing: 'ease-out-quad'
         });
 
-        // Обновленный параллакс
-        document.addEventListener('scroll', () => {
+    // Параллакс
+    document.addEventListener('scroll', () => {
             const parallax = document.querySelector('.global-parallax');
+            const overlay = document.querySelector('.parallax-overlay');
             const scrollY = window.pageYOffset;
-            const speed = 0.5;
             
-            parallax.style.transform = `translate3d(0, ${-scrollY * speed}px, 0) scale(1.2)`;
+            // Анимация для основного фона
+            parallax.style.transform = `translate3d(0, ${-scrollY * 0.5}px, 0) scale(1.1)`;
+            
+            // Анимация для верхнего слоя
+            overlay.style.transform = `translate3d(0, ${-scrollY * 1.7}px, 0)`;
         });
 
-        // Остальной JavaScript без изменений
         const gallery = document.querySelector('.gallery');
         let isDown = false;
         let startX;
