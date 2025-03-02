@@ -336,6 +336,26 @@
                 font-size: 1rem;
             }
             
+            @media (hover: none) and (pointer: coarse) {
+        .parallax-overlay {
+            opacity: 0.05 !important; /* Уменьшаем непрозрачность */
+            background-size: 25% auto; /* Упрощаем текстуру */
+            transform: translateZ(0) !important;
+        }
+        
+        .global-parallax {
+            animation: none !important;
+            transform: translateZ(-1px) scale(1.1) !important;
+        }
+        
+        /* Отключаем сложные эффекты */
+        .doctor-photo:hover {
+            transform: none !important;
+        }
+        
+        .skill-card:hover {
+            transform: none !important;
+        }
             .doctor-photo {
                 width: 300px;
                 height: 300px;
@@ -366,7 +386,7 @@
         backface-visibility: hidden;
         perspective: 1000px;
     }
-        }
+        }}
     </style>
 </head>
 <body>
