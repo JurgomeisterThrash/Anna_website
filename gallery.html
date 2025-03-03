@@ -20,16 +20,17 @@
 
     <title>Галерея работ | Анна Ле</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --light-1: #ffffff;
-            --light-2: #fff5f5;
-            --light-3: #ffe5e5;
-            --accent: #ff1a1a;
-            --accent-dark: #cc0000;
+            --light-1: #ebebeb;
+            --light-2: #d6d6d6;
+            --light-3: #f0eeee;
+            --accent: #d61818;
+            --accent-dark: #910404;
+            --accent-light: #ff1c1c;
         }
 
         * {
@@ -42,29 +43,57 @@
 
         body {
             background-color: var(--light-1);
-            color: #333333;
+            color: #1b1b1b;
             line-height: 1.5;
         }
 
-        h1, h2, h3 {
-            font-family: 'Roboto Condensed', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-            color: var(--accent-dark);
-            text-align: center;
+        .global-parallax {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 600vh;
+            background: url('bg-index.png') center/cover repeat-y;
+            z-index: -2;
+            transform: translateZ(-1px) scale(1);
+            opacity: 0.45;
+            will-change: transform;
         }
 
-        /* Навигация */
+        .parallax-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 800vh;
+            background: url('overlay.png') center/cover repeat;
+            opacity: 1;
+            z-index: 9;
+            pointer-events: none;
+            mix-blend-mode: multiply;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Yanone Kaffeesatz';
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 3px;
+            margin-bottom: 1.2rem;
+            color: var(--accent);
+            text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.356);
+        }
+
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255,255,255,0.95);
+            background: var(--accent);
+            z-index: 1000;
             padding: 1rem;
             backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         .nav-list {
@@ -75,9 +104,9 @@
         }
 
         .nav-link {
-            color: var(--accent-dark);
+            color: var(--light-1);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             position: relative;
             padding: 0.5rem 1rem;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -91,7 +120,7 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background: var(--accent);
+            background: var(--light-1);
             transition: all 0.3s;
         }
 
@@ -100,12 +129,10 @@
             left: 0;
         }
 
-        /* Основной контент */
         .gallery-section {
             padding: 8rem 2rem;
             position: relative;
-            min-height: 80vh;
-            background: var(--light-2);
+            min-height: 100vh;
         }
 
         .gallery-container {
@@ -142,10 +169,9 @@
         }
 
         .gallery-item:hover .thumb-img {
-            filter: grayscale(5);
+            filter: grayscale(0);
         }
 
-        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -162,17 +188,20 @@
             display: flex;
             height: auto;
             min-height: 100vh;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0rem 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 4rem 0;
+            touch-action: pan-y;
         }
 
         .slide {
             min-width: 100%;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 2rem;
             box-sizing: border-box;
+            flex-shrink: 0;
         }
 
         .full-img-container {
@@ -194,7 +223,7 @@
         .modal-text {
             max-width: 95%;
             padding: 2rem;
-            margin: 0rem auto;
+            margin: 2rem auto;
             background: var(--light-1);
             border-radius: 10px;
             font-size: 1.1rem;
@@ -242,22 +271,32 @@
             transform: scale(1.2);
         }
 
+        footer {
+            background: var(--accent);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        .creator-info {
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.1rem;
+            font-size: 0.8em;
+        }
+
         @media (max-width: 768px) {
-            .gallery-section {
-                padding: 6rem 1rem;
-            }
-            
             .gallery-container {
                 grid-template-columns: 1fr;
             }
             
-            .full-img-container {
-                padding: 1rem;
+            .parallax-overlay {
+                background-image: url('overlaymobile.png');
+                height: 900vh;
             }
             
-            .modal-text {
-                padding: 1.5rem;
-                font-size: 1rem;
+            .nav-list {
+                gap: 1.5rem;
+                font-size: 0.9rem;
             }
             
             .nav-button {
@@ -279,28 +318,36 @@
             width: 100px;
             height: 3px;
             background: var(--accent);
-            margin: 1.5rem auto;
+            margin: 1rem auto;
         }
     </style>
 </head>
 <body>
+    <div class="global-parallax"></div>
+    <div class="parallax-overlay"></div>
+
     <nav class="nav">
         <ul class="nav-list">
-            <li><a href="index.html" class="nav-link">Главная</a></li>
+            <li><a class="nav-link" href="index.html#hero">Главная</a></li>
+            <li><a class="nav-link" href="index.html#gallery">Работы</a></li>
+            <li><a class="nav-link" href="index.html#contacts">Контакты</a></li>
         </ul>
     </nav>
 
-    <section class="gallery-section">
-        <h2 data-aos="fade-down">Архив разрушений</h2>
-        <div class="gallery-container">
-            <div class="gallery-item" data-aos="zoom-in">
-                <img src="work1-thumb.jpg" class="thumb-img" alt="Полное уничтожение зубного ряда">
-            </div>
-            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-                <img src="work2-thumb.jpg" class="thumb-img" alt="Инновационный кривой прикус">
+    <section class="gallery-section" data-aos="fade-up">
+        <h2>Архив разрушений</h2>
+        <div class="gallery-container" id="galleryContainer"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="content">
+            <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
+            <div class="creator-info">
+                Сайт создан из богохульных побуждений<br>
+                <a href="https://t.me/jurgomeister" style="color: rgba(255,255,255,0.8);">Гениальный верстальщик</a>
             </div>
         </div>
-    </section>
+    </footer>
 
     <div id="modal" class="modal">
         <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -319,6 +366,44 @@
             easing: 'ease-out-quad'
         });
 
+        // Параллакс
+        document.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.global-parallax');
+            const overlay = document.querySelector('.parallax-overlay');
+            const scrollY = window.pageYOffset;
+            
+            parallax.style.transform = `translate3d(0, ${-scrollY * 0.5}px, 0) scale(1.1)`;
+            overlay.style.transform = `translate3d(0, ${-scrollY * 1.4}px, 0)`;
+        });
+
+// Загрузка данных при загрузке страницы
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error('Ошибка загрузки данных');
+        const data = await response.json();
+        cases = data.cases;
+        initGallery();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Ошибка загрузки галереи. Пожалуйста, попробуйте позже.');
+    }
+});
+function initGallery() {
+    const container = document.getElementById('galleryContainer');
+    container.innerHTML = cases.map((c, index) => `
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="${index * 200}">
+            <img src="${c.thumb}" class="thumb-img" alt="${c.description}">
+        </div>
+    `).join('');
+
+    // Добавляем обработчики клика
+    document.querySelectorAll('.gallery-item').forEach((item, index) => {
+        item.addEventListener('click', () => openModal(index));
+    });
+}
+
+        // Модальное окно
         const cases = [
             {
                 thumb: 'work1-thumb.jpg',
@@ -329,11 +414,88 @@
                 thumb: 'work2-thumb.jpg',
                 full: 'work2-full.jpg',
                 description: 'Патологический прикус по инновационной методике. Гарантированные проблемы: мигрени, нарушение пищеварения, социальная изоляция.'
+            },
+            {
+                thumb: 'work3-thumb.jpg',
+                full: 'work3-full.jpg',
+                description: 'Деревянные протезы ручной работы. Особенности: постоянный привкус сосны и риск возгорания при курении.'
             }
         ];
 
+        let cases = [];
         let currentIndex = 0;
         let isModalOpen = false;
+
+        let currentIndex = 0;
+        let isModalOpen = false;
+        let isAnimating = false;
+        let startX = 0;
+        let currentTranslate = 0;
+        let initialTranslate = 0;
+        const modalContent = document.getElementById('modalContent');
+        // Обработчик стрелок
+
+        function handleKeyDown(e) {
+        if (isModalOpen) {
+            switch(e.keyCode) {
+                case 37: // Стрелка влево
+                    changeSlide(-1);
+                    break;
+                case 39: // Стрелка вправо
+                    changeSlide(1);
+                    break;
+            }
+        }
+    }
+        // Обработчики свайпа
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+            initialTranslate = currentTranslate;
+        }
+
+        function handleTouchMove(e) {
+            if (!isAnimating) {
+                const currentX = e.touches[0].clientX;
+                const diff = currentX - startX;
+                currentTranslate = initialTranslate + diff;
+                modalContent.style.transform = `translateX(${currentTranslate}px)`;
+            }
+        }
+
+        function handleTouchEnd() {
+            if (!isAnimating) {
+                const diff = initialTranslate - currentTranslate;
+                if (Math.abs(diff) > 50) {
+                    isAnimating = true;
+                    if (diff > 0) {
+                        changeSlide(1);
+                    } else {
+                        changeSlide(-1);
+                    }
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 500);
+                } else {
+                    modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    currentTranslate = -currentIndex * window.innerWidth;
+                }
+            }
+        }
+
+        function changeSlide(direction) {
+            const newIndex = (currentIndex + direction + cases.length) % cases.length;
+            if (newIndex < 0 || newIndex >= cases.length) return;
+            
+            isAnimating = true;
+            currentIndex = newIndex;
+            modalContent.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            setTimeout(() => {
+                modalContent.style.transition = 'none';
+                isAnimating = false;
+            }, 300);
+        }
 
         document.querySelectorAll('.gallery-item').forEach((item, index) => {
             item.addEventListener('click', () => openModal(index));
@@ -346,6 +508,12 @@
             updateModalContent();
             document.getElementById('modal').style.display = 'block';
             document.body.style.overflow = 'hidden';
+
+            document.addEventListener('keydown', handleKeyDown);
+            modalContent.addEventListener('touchstart', handleTouchStart);
+            modalContent.addEventListener('touchmove', handleTouchMove);
+            modalContent.addEventListener('touchend', handleTouchEnd);
+
         }
 
         function closeModal() {
@@ -353,10 +521,15 @@
             if (history.state?.modal) history.back();
             document.getElementById('modal').style.display = 'none';
             document.body.style.overflow = 'auto';
+            
+            document.removeEventListener('keydown', handleKeyDown);
+            modalContent.removeEventListener('touchstart', handleTouchStart);
+            modalContent.removeEventListener('touchmove', handleTouchMove);
+            modalContent.removeEventListener('touchend', handleTouchEnd);
+            
         }
 
         function updateModalContent() {
-            const modalContent = document.getElementById('modalContent');
             modalContent.innerHTML = cases.map((c, index) => `
                 <div class="slide" data-index="${index}">
                     <div class="full-img-container">
@@ -369,18 +542,10 @@
             modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
 
-        function changeSlide(direction) {
-            currentIndex = (currentIndex + direction + cases.length) % cases.length;
-            document.getElementById('modalContent').style.transform = 
-                `translateX(-${currentIndex * 100}%)`;
-        }
-
-        // Закрытие по клику вне области
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
 
-        // Обработка истории браузера
         window.addEventListener('popstate', function() {
             if (isModalOpen) closeModal();
         });
