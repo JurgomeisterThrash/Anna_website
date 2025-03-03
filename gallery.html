@@ -3,21 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Галерея разрушительных работ Анны Ле - передовой опыт в анальной стоматологии">
-    <meta name="keywords" content="примеры работ, разрушение зубов, стоматология, до и после">
-    <meta property="og:title" content="Галерея работ | Анна Ле - Стоматолог-ящперица">
-    <meta property="og:description" content="Лучшие примеры зубного хаоса и анальной стоматологии">
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ImageGallery",
-        "name": "Работы по уничтожению зубов",
-        "description": "Коллекция уникальных случаев из практики",
-        "image": ["work1-full.jpg", "work2-full.jpg"]
-    }
-    </script>
-
     <title>Галерея работ | Анна Ле</title>
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -191,8 +176,6 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 4rem 0;
             touch-action: pan-y;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 4rem 0;
         }
 
         .slide {
@@ -272,7 +255,30 @@
         .close-btn:hover {
             transform: scale(1.2);
         }
+        .modal-article-btn {
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1.5rem;
+    box-shadow: 0 5px 15px rgba(255,0,0,0.2);
+}
 
+.modal-article-btn:hover {
+    background: var(--accent-dark);
+    transform: translateY(-3px);
+}
+
+.modal-text {
+    /* existing styles */
+    position: relative;
+}
         footer {
             background: var(--accent);
             padding: 2rem 1rem;
@@ -338,18 +344,9 @@
 
     <section class="gallery-section" data-aos="fade-up">
         <h2>Архив разрушений</h2>
-        <div class="gallery-container">
-            <div class="gallery-item" data-aos="zoom-in">
-                <img src="work1-thumb.jpg" class="thumb-img" alt="Полное уничтожение зубного ряда">
-            </div>
-            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-                <img src="work2-thumb.jpg" class="thumb-img" alt="Инновационный кривой прикус">
-            </div>
-            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-                <img src="work3-thumb.jpg" class="thumb-img" alt="Деревянные протезы">
-            </div>
+        <div class="gallery-container" id="galleryContainer">
+            <!-- Галерея будет загружена через JavaScript -->
         </div>
-    </footer>
     </section>
 
     <footer class="footer">
@@ -379,6 +376,7 @@
             easing: 'ease-out-quad'
         });
 
+        // Параллакс-эффект
         document.addEventListener('scroll', () => {
             const parallax = document.querySelector('.global-parallax');
             const overlay = document.querySelector('.parallax-overlay');
@@ -388,88 +386,94 @@
             overlay.style.transform = `translate3d(0, ${-scrollY * 1.4}px, 0)`;
         });
 
-        // Параллакс
-        document.addEventListener('scroll', () => {
-            const parallax = document.querySelector('.global-parallax');
-            const overlay = document.querySelector('.parallax-overlay');
-            const scrollY = window.pageYOffset;
-            
-            parallax.style.transform = `translate3d(0, ${-scrollY * 0.5}px, 0) scale(1.1)`;
-            overlay.style.transform = `translate3d(0, ${-scrollY * 1.4}px, 0)`;
-        });
-
-// Загрузка данных при загрузке страницы
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const response = await fetch('data.json');
-        if (!response.ok) throw new Error('Ошибка загрузки данных');
-        const data = await response.json();
-        cases = data.cases;
-        initGallery();
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Ошибка загрузки галереи. Пожалуйста, попробуйте позже.');
-    }
-});
-function initGallery() {
-    const container = document.getElementById('galleryContainer');
-    container.innerHTML = cases.map((c, index) => `
-        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="${index * 200}">
-            <img src="${c.thumb}" class="thumb-img" alt="${c.description}">
-        </div>
-    `).join('');
-
-    // Добавляем обработчики клика
-    document.querySelectorAll('.gallery-item').forEach((item, index) => {
-        item.addEventListener('click', () => openModal(index));
-    });
-}
-
-        // Модальное окно
-        const cases = [
-            {
-                thumb: 'work1-thumb.jpg',
-                full: 'work1-full.jpg',
-                description: 'Экспресс-разрушение за 15 минут. Применялись: кувалда, напильник и полное отсутствие анестезии. Результат: пожизненная потребность в протезировании.'
-            },
-            {
-                thumb: 'work2-thumb.jpg',
-                full: 'work2-full.jpg',
-                description: 'Патологический прикус по инновационной методике. Гарантированные проблемы: мигрени, нарушение пищеварения, социальная изоляция.'
-            },
-            {
-                thumb: 'work3-thumb.jpg',
-                full: 'work3-full.jpg',
-                description: 'Деревянные протезы ручной работы. Особенности: постоянный привкус сосны и риск возгорания при курении.'
-            }
-        ];
-
+        // Галерея
         let cases = [];
         let currentIndex = 0;
         let isModalOpen = false;
-
-        let currentIndex = 0;
-        let isModalOpen = false;
         let isAnimating = false;
+        const modalContent = document.getElementById('modalContent');
+
+        // Загрузка данных
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error('Ошибка загрузки данных');
+                const data = await response.json();
+                cases = data.cases;
+                initGallery();
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ошибка загрузки галереи. Пожалуйста, попробуйте позже.');
+            }
+        });
+
+        function initGallery() {
+            const container = document.getElementById('galleryContainer');
+            container.innerHTML = cases.map((c, index) => `
+                <div class="gallery-item" data-aos="zoom-in" data-aos-delay="${index * 200}">
+                    <img src="${c.thumb}" class="thumb-img" alt="${c.description}">
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                item.addEventListener('click', () => openModal(index));
+            });
+        }
+
+        // Модальное окно
+        function openModal(index) {
+            currentIndex = index;
+            isModalOpen = true;
+            history.pushState({ modal: true }, '', '#modal');
+            updateModalContent();
+            document.getElementById('modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            modalContent.addEventListener('touchstart', handleTouchStart);
+            modalContent.addEventListener('touchmove', handleTouchMove);
+            modalContent.addEventListener('touchend', handleTouchEnd);
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        function closeModal() {
+            isModalOpen = false;
+            if (history.state?.modal) history.back();
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            modalContent.removeEventListener('touchstart', handleTouchStart);
+            modalContent.removeEventListener('touchmove', handleTouchMove);
+            modalContent.removeEventListener('touchend', handleTouchEnd);
+            document.removeEventListener('keydown', handleKeyDown);
+        }
+
+        function updateModalContent() {
+    modalContent.innerHTML = cases.map((c, index) => `
+        <div class="slide" data-index="${index}">
+            <div class="full-img-container">
+                <img src="${c.full}" class="full-img" alt="${c.description}">
+            </div>
+            <div class="modal-text">
+                ${c.description}
+                ${c.article ? `
+                <a href="${c.article.url}" 
+                   class="modal-article-btn"
+                   target="_blank"
+                   rel="noopener">
+                    Читать подробнее: ${c.article.title}
+                </a>` : ''}
+            </div>
+        </div>
+    `).join('');
+    
+    modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+        // Управление слайдами
         let startX = 0;
         let currentTranslate = 0;
         let initialTranslate = 0;
-        const modalContent = document.getElementById('modalContent');
-        // Обработчик стрелок
 
-        function handleKeyDown(e) {
-        if (isModalOpen) {
-            switch(e.keyCode) {
-                case 37: // Стрелка влево
-                    changeSlide(-1);
-                    break;
-                case 39: // Стрелка вправо
-                    changeSlide(1);
-                    break;
-            }
-        }
-    }
-        // Обработчики свайпа
         function handleTouchStart(e) {
             startX = e.touches[0].clientX;
             initialTranslate = currentTranslate;
@@ -489,17 +493,20 @@ function initGallery() {
                 const diff = initialTranslate - currentTranslate;
                 if (Math.abs(diff) > 50) {
                     isAnimating = true;
-                    if (diff > 0) {
-                        changeSlide(1);
-                    } else {
-                        changeSlide(-1);
-                    }
-                    setTimeout(() => {
-                        isAnimating = false;
-                    }, 500);
+                    changeSlide(diff > 0 ? 1 : -1);
+                    setTimeout(() => isAnimating = false, 500);
                 } else {
                     modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
                     currentTranslate = -currentIndex * window.innerWidth;
+                }
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (isModalOpen) {
+                switch(e.keyCode) {
+                    case 37: changeSlide(-1); break;
+                    case 39: changeSlide(1); break;
                 }
             }
         }
@@ -519,57 +526,7 @@ function initGallery() {
             }, 300);
         }
 
-        document.querySelectorAll('.gallery-item').forEach((item, index) => {
-            item.addEventListener('click', () => openModal(index));
-        });
-
-        function openModal(index) {
-            currentIndex = index;
-            isModalOpen = true;
-            history.pushState({ modal: true }, '', '#modal');
-            updateModalContent();
-            document.getElementById('modal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-
-            document.addEventListener('keydown', handleKeyDown);
-            modalContent.addEventListener('touchstart', handleTouchStart);
-            modalContent.addEventListener('touchmove', handleTouchMove);
-            modalContent.addEventListener('touchend', handleTouchEnd);
-
-        }
-
-        function closeModal() {
-            isModalOpen = false;
-            if (history.state?.modal) history.back();
-            document.getElementById('modal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            document.removeEventListener('keydown', handleKeyDown);
-            modalContent.removeEventListener('touchstart', handleTouchStart);
-            modalContent.removeEventListener('touchmove', handleTouchMove);
-            modalContent.removeEventListener('touchend', handleTouchEnd);
-            
-        }
-
-        function updateModalContent() {
-            modalContent.innerHTML = cases.map((c, index) => `
-                <div class="slide" data-index="${index}">
-                    <div class="full-img-container">
-                        <img src="${c.full}" class="full-img" alt="${c.description}">
-                    </div>
-                    <div class="modal-text">${c.description}</div>
-                </div>
-            `).join('');
-            
-            modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        function changeSlide(direction) {
-            currentIndex = (currentIndex + direction + cases.length) % cases.length;
-            document.getElementById('modalContent').style.transform = 
-                `translateX(-${currentIndex * 100}%)`;
-        }
-
+        // Закрытие по клику вне области
         document.getElementById('modal').addEventListener('click', function(e) {
             if (e.target === this) closeModal();
         });
