@@ -1,0 +1,14 @@
+{
+    "cases": [
+      {
+        "thumb": "gallery/thumbs/work1-thumb.jpg",
+        "full": "gallery/full/work1-full.jpg",
+        "description": "Описание первого кейса..."
+      },
+      {
+        "thumb": "gallery/thumbs/work2-thumb.jpg",
+        "full": "gallery/full/work2-full.jpg", 
+        "description": "Описание второго кейса..."
+      }
+    ]
+  }
