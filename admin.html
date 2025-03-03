@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админ-панель</title>
+    <style>
+        /* Стили из предыдущего ответа */
+        .preview-img { max-width: 200px; max-height: 150px; }
+        .upload-section { border: 2px dashed #ccc; padding: 20px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <input type="password" id="password" placeholder="Пароль администратора">
+        <button onclick="login()">Войти</button>
+    </div>
+
+    <div id="panel" style="display: none;">
+        <div class="case-editor">
+            <h2>Редактор кейсов</h2>
+            <div id="currentImage">
+                <img class="preview-img" id="thumbPreview">
+                <img class="preview-img" id="fullPreview">
+            </div>
+            
+            <div class="upload-section">
+                <h3>Загрузка изображений</h3>
+                <input type="file" id="fileInput">
+                <button onclick="uploadImage('thumb')">Загрузить миниатюру</button>
+                <button onclick="uploadImage('full')">Загрузить полное фото</button>
+            </div>
+
+            <div class="form">
+                <textarea id="description" placeholder="Описание"></textarea>
+                <input type="text" id="articleUrl" placeholder="Ссылка на статью">
+                <input type="text" id="articleTitle" placeholder="Заголовок статьи">
+                <button onclick="saveCase()">Сохранить кейс</button>
+            </div>
+        </div>
+
+        <div class="cases-list">
+            <h2>Все кейсы</h2>
+            <div id="casesContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentCase = null;
+        let authToken = null;
+
+        async function login() {
+            authToken = document.getElementById('password').value;
+            try {
+                const response = await fetch(`/api/cases?password=${authToken}`);
+                if(response.ok) {
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('panel').style.display = 'block';
+                    loadCases();
+                }
+            } catch(e) {
+                alert('Ошибка авторизации');
+            }
+        }
+
+        async function uploadImage(type) {
+            const fileInput = document.getElementById('fileInput');
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            formData.append('type', type);
+
+            try {
+                const response = await fetch(`/api/upload?password=${authToken}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                if(type === 'thumb') {
+                    document.getElementById('thumbPreview').src = data.path;
+                } else {
+                    document.getElementById('fullPreview').src = data.path;
+                }
+            } catch(e) {
+                alert('Ошибка загрузки');
+            }
+        }
+
+        async function saveCase() {
+            const caseData = {
+                thumb: document.getElementById('thumbPreview').src,
+                full: document.getElementById('fullPreview').src,
+                description: document.getElementById('description').value,
+                article: {
+                    url: document.getElementById('articleUrl').value,
+                    title: document.getElementById('articleTitle').value
+                }
+            };
+
+            try {
+                const response = await fetch('/api/save?password=${authToken}', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(caseData)
+                });
+                
+                if(response.ok) {
+                    alert('Сохранено!');
+                    loadCases();
+                }
+            } catch(e) {
+                alert('Ошибка сохранения');
+            }
+        }
+
+        async function loadCases() {
+            const response = await fetch(`/api/cases?password=${authToken}`);
+            const data = await response.json();
+            renderCases(data.cases);
+        }
+
+        function renderCases(cases) {
+            const container = document.getElementById('casesContainer');
+            container.innerHTML = cases.map((c, i) => `
+                <div class="case-item">
+                    <img src="${c.thumb}" class="preview-img">
+                    <p>${c.description}</p>
+                    <button onclick="editCase(${i})">✏️</button>
+                    <button onclick="deleteCase(${i})">🗑️</button>
+                </div>
+            `).join('');
+        }
+
+        function editCase(index) {
+            // Загрузка данных кейса в форму
+        }
+
+        async function deleteCase(index) {
+            // Удаление кейса
+        }
+    </script>
+</body>
+</html>
