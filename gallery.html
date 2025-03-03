@@ -191,6 +191,8 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 4rem 0;
             touch-action: pan-y;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 4rem 0;
         }
 
         .slide {
@@ -336,21 +338,19 @@
 
     <section class="gallery-section" data-aos="fade-up">
         <h2>Архив разрушений</h2>
-        <div class="gallery-container" id="galleryContainer"></div>
-    </section>
-
-    <footer class="footer">
-        <div class="content">
-            <p>© 2024 Анна Ле | Лицензия на отстрел зубов №666</p>
-            <div class="creator-info">
-                Сайт создан из богохульных побуждений<br>
-                <a href="https://t.me/jurgomeister" style="color: rgba(255,255,255,0.8);">Гениальный верстальщик</a>
+        <div class="gallery-container">
+            <div class="gallery-item" data-aos="zoom-in">
+                <img src="work1-thumb.jpg" class="thumb-img" alt="Полное уничтожение зубного ряда">
+            </div>
+            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                <img src="work2-thumb.jpg" class="thumb-img" alt="Инновационный кривой прикус">
             </div>
             <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
                 <img src="work3-thumb.jpg" class="thumb-img" alt="Деревянные протезы">
             </div>
         </div>
     </footer>
+    </section>
 
     <footer class="footer">
         <div class="content">
@@ -377,6 +377,15 @@
             once: false,
             mirror: true,
             easing: 'ease-out-quad'
+        });
+
+        document.addEventListener('scroll', () => {
+            const parallax = document.querySelector('.global-parallax');
+            const overlay = document.querySelector('.parallax-overlay');
+            const scrollY = window.pageYOffset;
+            
+            parallax.style.transform = `translate3d(0, ${-scrollY * 0.5}px, 0) scale(1.1)`;
+            overlay.style.transform = `translate3d(0, ${-scrollY * 1.4}px, 0)`;
         });
 
         // Параллакс
@@ -553,6 +562,12 @@ function initGallery() {
             `).join('');
             
             modalContent.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        function changeSlide(direction) {
+            currentIndex = (currentIndex + direction + cases.length) % cases.length;
+            document.getElementById('modalContent').style.transform = 
+                `translateX(-${currentIndex * 100}%)`;
         }
 
         document.getElementById('modal').addEventListener('click', function(e) {
