@@ -496,10 +496,10 @@
             const scrollY = window.pageYOffset;
             
             // Анимация для основного фона
-            parallax.style.transform = `translate3d(0, ${-scrollY * 0.5}px, 0) scale(1)`;
+            parallax.style.transform = `translate3d(0, ${-scrollY * 0.7}px, 0) scale(1)`;
             
             // Анимация для верхнего слоя
-            overlay.style.transform = `translate3d(0, ${-scrollY * 1.4}px, 0)`;
+            overlay.style.transform = `translate3d(0, ${-scrollY * 1.5}px, 0)`;
         });
 
         const gallery = document.querySelector('.gallery');
