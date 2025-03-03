@@ -3,12 +3,30 @@
       {
         "thumb": "gallery/thumbs/work1-thumb.jpg",
         "full": "gallery/full/work1-full.jpg",
-        "description": "Описание первого кейса..."
+        "description": "Полное уничтожение зубного ряда за 1 сеанс",
+        "article": {
+          "url": "/blog/full-destruction",
+          "title": "Как мы разрушили 32 зуба за 15 минут"
+        }
       },
       {
         "thumb": "gallery/thumbs/work2-thumb.jpg",
-        "full": "gallery/full/work2-full.jpg", 
-        "description": "Описание второго кейса..."
+        "full": "gallery/full/work2-full.jpg",
+        "description": "Установка деревянных протезов 18 века"
+      },
+      {
+        "thumb": "gallery/thumbs/work3-thumb.jpg",
+        "full": "gallery/full/work3-full.jpg",
+        "description": "Экспериментальное лечение собаки Павловой",
+        "article": {
+          "url": "/blog/pavlova-dog",
+          "title": "История пациентки-таксы"
+        }
+      },
+      {
+        "thumb": "gallery/thumbs/work4-thumb.jpg",
+        "full": "gallery/full/work4-full.jpg",
+        "description": "Результат 10-летнего 'лечения' кариеса"
       }
     ]
   }
