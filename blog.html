@@ -7,7 +7,7 @@
     <meta name="keywords" content="стоматологический блог, случаи из практики, разрушение зубов, анальная стоматология, деревянные протезы">
     <meta property="og:title" content="Анна Ле | Блог стоматолога-ящперицы">
     <meta property="og:description" content="Эксклюзивные случаи и профессиональные советы от легендарного стоматолога">
-    <title>Анна Ле | Блог стоматолога-ящперицы</title>
+    <meta property="og:image" content="blog-cover.jpg">
     
     <script type="application/ld+json">
     {
@@ -18,10 +18,13 @@
             "@type": "Person",
             "name": "Анна Ле"
         },
-        "description": "Профессиональные заметки и клинические случаи из практики стоматолога-ящперицы"
+        "description": "Профессиональные заметки и клинические случаи из практики стоматолога-ящперицы",
+        "image": "blog-cover.jpg"
     }
     </script>
 
+    <title>Анна Ле | Блог разрушения зубов</title>
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Yanone+Kaffeesatz:wght@200..700&display=swap" rel="stylesheet">
 
@@ -50,7 +53,6 @@
         }
 
         .global-parallax {
-
             position: fixed;
             top: 0;
             left: 0;
@@ -87,39 +89,6 @@
             color: var(--accent);
             text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.356);
         }
-        p {font-family: 'Yanone Kaffeesatz';
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 1.5rem;
-            font-size: 1.25rem;
-            text-shadow: 0px 4px 5px rgba(0, 0, 0, 0.356);
-        }
-        
-        .hero .content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-        }
-
-        footer {
-            background: var(--accent);
-            padding: 2rem 1rem;
-            text-align: center;
-            color: white;
-        }
-
-        .footer .content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .creator-info {
-            color: rgba(255,255,255,0.8);
-            margin-top: 0.1rem;
-            font-size: 0.8em;
-        }
 
         .nav {
             position: fixed;
@@ -149,25 +118,9 @@
             font-weight: 700;
         }
 
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--light-1);
-            transition: all 0.3s;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
         .section {
             min-height: 100vh;
-            padding: 3rem 1rem;
+            padding: 8rem 1rem 3rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -176,71 +129,152 @@
             background: transparent;
         }
 
-        .section-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0);
-            z-index: -1;
-        }
-
         .content {
             position: relative;
-             z-index: 2;
-             max-width: 1200px;
-             width: 100%;
-             padding: 1rem;
+            z-index: 2;
+            max-width: 1400px;
+            width: 100%;
+            padding: 1rem;
         }
-        .why-list {
-            list-style: none;
+
+        /* Стили блога */
+        .blog-header {
+            text-align: center;
+            margin: 4rem 0 2rem;
+        }
+
+        .blog-title {
+            font-size: 5.5rem;
+            letter-spacing: 8px;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 var(--accent-dark);
+            line-height: 1;
+        }
+
+        .blog-subtitle {
+            font-size: 2rem;
+            color: var(--accent-dark);
+            letter-spacing: 2px;
+        }
+
+        .blog-container {
+            display: flex;
+            gap: 2rem;
             margin-top: 3rem;
         }
 
-        .why-list li {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-            font-size: 1.6rem;
-            color: #000000;
+        .categories-sidebar {
+            width: 220px;
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+            padding: 2rem 1rem;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 5px 5px 0 var(--accent);
+            margin-left: -220px;
+            flex-shrink: 0;
         }
 
-        .why-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-size: 2rem;
-        }
-        .doctor-photo {
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            margin: 3rem 0;
-            border: 8px solid var(--accent);
-            box-shadow: 0 3px 40px rgba(255,26,26,1);
-            transition: transform 0.3s;
-            background: var(--light-1);
+        .category-filter {
             display: block;
-            z-index: 10;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border: none;
+            background: var(--light-1);
+            color: var(--accent-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            font-family: 'Yanone Kaffeesatz';
+            font-size: 1.2rem;
+            border-left: 5px solid transparent;
         }
 
-        .doctor-photo:hover {
-            transform: scale(1.05);
+        .category-filter.active,
+        .category-filter:hover {
+            background: var(--accent);
+            color: white;
+            border-left-color: var(--accent-dark);
         }
 
-        .contacts {
+        .articles-grid {
+            flex: 1;
             display: grid;
-            gap: 2rem;
-            margin-top: 4rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Разная высота карточек */
+        .article-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.2rem;
+            border-radius: 15px;
+            box-shadow: 5px 5px 0 var(--accent);
+            transition: all 0.1s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+        }
+
+        .article-card:nth-child(odd) {
+            min-height: 450px;
+            margin-top: 3rem;
+        }
+
+        .article-card:nth-child(even) {
+            min-height: 350px;
+            margin-bottom: 2rem;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--accent);
+        }
+
+        .article-category {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            z-index: 3;
+        }
+
+        .article-date {
+            color: var(--accent-dark);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            flex-grow: 1;
+            font-family: 'Yanone Kaffeesatz';
+        }
+
+        .article-excerpt {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #444;
         }
 
         .btn {
-            padding: 1.5rem 3rem;
+            padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
             font-size: 1.2rem;
@@ -248,121 +282,31 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid var(--accent);
-            background: var(--light-1);
-            color: var(--accent-dark);
+            background: var(--accent);
+            color: white;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            box-shadow: 0 5px 15px rgba(255,0,0,0.2);
+            display: inline-block;
+            margin-top: auto;
         }
 
         .btn:hover {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 10px 20px rgba(255,0,0,0.2);
-        }
-
-        .address {
-            margin-top: 3rem;
-            padding: 2rem;
-            background: rgba(218, 23, 88, 0.2);
-            border-left: 4px solid var(--accent);
-            border-radius: 10px;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 3px;
-            background: var(--accent);
-            margin: 1rem auto;
-        }
-        .blog-header {
-            text-align: center;
-            margin: 4rem 0;
-            position: relative;
-        }
-
-        .blog-title {
-            font-size: 5.5rem;
-            letter-spacing: 8px;
-            margin-bottom: 2rem;
-            text-shadow: 3px 3px 0 var(--accent-dark);
-            position: relative;
-            z-index: 2;
-        }
-        .blog-article {
-            background: rgba(255, 255, 255, 0.9);
-            margin: 2rem 0;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(214,24,24,0.1);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .article-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 3px solid var(--accent);
-        }
-
-        .article-meta {
-            color: var(--accent-dark);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .article-excerpt {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin: 1.5rem 0;
-        }
-
-        .read-more {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-
-        .breadcrumbs {
-            margin: 1rem 0;
-            font-size: 0.9rem;
-            color: var(--accent-dark);
-        }
-
-        .breadcrumbs a {
-            color: inherit;
-            text-decoration: none;
+            background: var(--accent-dark);
         }
 
         .pagination {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin: 3rem 0;
+            margin: 5rem 0 3rem;
         }
 
         .page-numbers {
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1.5rem;
             border: 2px solid var(--accent);
             border-radius: 5px;
             color: var(--accent-dark);
             text-decoration: none;
+            font-weight: 700;
         }
 
         .page-numbers.current {
@@ -370,49 +314,58 @@
             color: white;
         }
 
-        @media (max-width: 768px) {
-            .nav-list {
+        footer {
+            background: var(--accent);
+            padding: 2rem 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        @media (max-width: 1200px) {
+            .blog-container {
+                flex-direction: column;
                 gap: 2rem;
-                font-size: 1rem;
-            }
-            .parallax-overlay {
-                background-image: url('overlaymobile.png');
-                background-size: 100% auto !important;
-                height: 900vh;
-                opacity: 1;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 0;
-                mix-blend-mode: multiply;
-            }    
-
-            .doctor-photo {
-                width: 300px;
-                height: 300px;
-                z-index: 10;
             }
             
-            .section {
-                padding: 5rem 1rem;
+            .categories-sidebar {
+                width: 100%;
+                margin-left: 0;
+                position: static;
             }
             
-            .gallery-item {
-                min-width: 90%;
-                height: 300px;
-            }
-            
-            .btn {
-                padding: 1rem 2rem;
-                font-size: 1rem;
-            }
-
-            .sales-badge {
-                font-size: 1.8rem;
-            }
-            
-            .sales-points {
+            .articles-grid {
                 grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+
+            .article-card {
+                min-height: auto !important;
+                margin: 1rem 0 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+            
+            .blog-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .category-filter {
+                font-size: 1rem;
+                padding: 0.8rem;
+            }
+            
+            .nav-list {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .article-image {
+                height: 150px;
             }
         }
     </style>
@@ -430,55 +383,70 @@
     <section class="section" id="blog">
         <div class="section-overlay"></div>
         <div class="content">
-            <div class="breadcrumbs" data-aos="fade-right">
-                <a href="index.html">Главная</a> / Блог
+            <div class="blog-header">
+                <h1 class="blog-title">БЛОГ РАЗРУШЕНИЯ</h1>
+                <p class="blog-subtitle">Хроники зубного апокалипсиса</p>
             </div>
 
-            <h1 data-aos="fade-down">Стоматологический блог</h1>
-            <p class="subtitle" data-aos="fade-up">97 лет разрушительного опыта в вашем распоряжении</p>
+            <div class="blog-container">
+                <!-- Фильтры категорий -->
+                <div class="categories-sidebar">
+                    <button class="category-filter active" data-category="all">Все категории</button>
+                    <button class="category-filter" data-category="clinical">Клинические случаи</button>
+                    <button class="category-filter" data-category="history">Исторический экскурс</button>
+                    <button class="category-filter" data-category="advice">Советы</button>
+                    <button class="category-filter" data-category="tech">Технологии</button>
+                </div>
 
-            <div class="blog-grid">
-                <!-- Статья 1 -->
-                <article class="blog-article" data-aos="zoom-in">
-                    <div class="article-meta">15 июля 2024 | Клинические случаи</div>
-                    <h2>Успешное разрушение 42 зубов за один прием</h2>
-                    <img src="case1.jpg" alt="Результаты работы" class="article-image">
-                    <div class="article-excerpt">
-                        <p>В своей практике я впервые столкнулась с пациентом, имевшим полный комплект здоровых зубов. 
-                        Используя уникальную методику совмещения перфоратора и паяльной лампы, нам удалось...</p>
-                    </div>
-                    <a href="article1.html" class="btn">Читать подробнее</a>
-                </article>
+                <!-- Сетка статей -->
+                <div class="articles-grid">
+                    <!-- Статья 1 -->
+                    <article class="article-card" data-category="clinical">
+                        <span class="article-category">Клинические случаи</span>
+                        <img src="case1.jpg" alt="Разрушение зубов" class="article-image">
+                        <div class="article-date">15 июля 2024</div>
+                        <h2 class="article-title">Рекордное удаление 42 зубов за 7 минут</h2>
+                        <p class="article-excerpt">Экстренное удаление полного зубного ряда с применением шахтерского перфоратора и динамита...</p>
+                        <a href="article1.html" class="btn">Читать статью</a>
+                    </article>
 
-                <!-- Статья 2 -->
-                <article class="blog-article" data-aos="zoom-in">
-                    <div class="article-meta">10 июля 2024 | Новости</div>
-                    <h2>Деревянные протезы: возвращение моды 1920-х</h2>
-                    <img src="case2.jpg" alt="Деревянные протезы" class="article-image">
-                    <div class="article-excerpt">
-                        <p>Новое - это хорошо забытое старое! Возрождаем традиции стоматологии начала XX века. 
-                        Почему сосновые протезы лучше титановых? Как избежать термитов в зубных конструкциях...</p>
-                    </div>
-                    <a href="article2.html" class="btn">Читать подробнее</a>
-                </article>
+                    <!-- Статья 2 -->
+                    <article class="article-card" data-category="history">
+                        <span class="article-category">Исторический экскурс</span>
+                        <img src="case2.jpg" alt="Деревянные протезы" class="article-image">
+                        <div class="article-date">14 июля 2024</div>
+                        <h2 class="article-title">Дуб vs Сосна: битва материалов</h2>
+                        <p class="article-excerpt">Сравнительный анализ разных пород дерева для изготовления зубных протезов...</p>
+                        <a href="article2.html" class="btn">Читать статью</a>
+                    </article>
 
-                <!-- Статья 3 -->
-                <article class="blog-article" data-aos="zoom-in">
-                    <div class="article-meta">1 июля 2024 | Советы</div>
-                    <h2>5 способов ускорить разрушение зубов в домашних условиях</h2>
-                    <img src="case3.jpg" alt="Домашнее разрушение" class="article-image">
-                    <div class="article-excerpt">
-                        <p>Не можете посещать стоматолога регулярно? Эти простые лайфхаки помогут вам 
-                        разрушать по 3 зуба в неделю без посещения клиники! От кислотных полосканий до...</p>
-                    </div>
-                    <a href="article3.html" class="btn">Читать подробнее</a>
-                </article>
+                    <!-- Статья 3 -->
+                    <article class="article-card" data-category="advice">
+                        <span class="article-category">Советы</span>
+                        <img src="case3.jpg" alt="Домашнее разрушение" class="article-image">
+                        <div class="article-date">13 июля 2024</div>
+                        <h2 class="article-title">Топ-5 кислот для домашнего использования</h2>
+                        <p class="article-excerpt">Как правильно использовать аккумуляторный электролит для ускоренного разрушения эмали...</p>
+                        <a href="article3.html" class="btn">Читать статью</a>
+                    </article>
+
+                    <!-- Статья 4 -->
+                    <article class="article-card" data-category="tech">
+                        <span class="article-category">Технологии</span>
+                        <img src="case4.jpg" alt="Оборудование" class="article-image">
+                        <div class="article-date">12 июля 2024</div>
+                        <h2 class="article-title">Б/У оборудование из моргов: где купить</h2>
+                        <p class="article-excerpt">Обзор рынка подержанных стоматологических установок...</p>
+                        <a href="article4.html" class="btn">Читать статью</a>
+                    </article>
+                </div>
             </div>
 
             <div class="pagination">
                 <a href="#" class="page-numbers current">1</a>
                 <a href="#" class="page-numbers">2</a>
                 <a href="#" class="page-numbers">3</a>
+                <a href="#" class="page-numbers">→</a>
             </div>
         </div>
     </section>
@@ -492,20 +460,28 @@
             </div>
         </div>
     </footer>
+
     <div class="global-parallax"></div>
     <div class="parallax-overlay"></div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            offset: 120,
-            once: false,
-            mirror: true,
-            easing: 'ease-out-quad'
+        // Фильтрация категорий
+        document.querySelectorAll('.category-filter').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.category-filter').forEach(btn => 
+                    btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                document.querySelectorAll('.article-card').forEach(article => {
+                    article.style.display = (category === 'all' || article.dataset.category === category) 
+                        ? 'flex' 
+                        : 'none';
+                });
+            });
         });
 
-        // Параллакс скрипт из index.html
+        // Параллакс-эффект
         document.addEventListener('scroll', () => {
             const parallax = document.querySelector('.global-parallax');
             const overlay = document.querySelector('.parallax-overlay');
