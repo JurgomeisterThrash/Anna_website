@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Админ-панель блога</title>
+    <!-- Подключаем Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        #editor-container {
+            height: 400px;
+            margin: 20px 0;
+        }
+        .post-list {
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .post-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="post-list" id="postList"></div>
+    
+    <div class="editor">
+        <button onclick="newPost()">Новая статья</button>
+        <input type="text" id="postId" hidden>
+        <input type="text" id="postTitle" placeholder="Заголовок">
+        <input type="text" id="postCategory" placeholder="Категория">
+        <div id="editor-container"></div>
+        <input type="file" id="postImage" accept="image/*">
+        <button onclick="savePost()">Сохранить</button>
+        <div id="preview"></div>
+    </div>
+
+    <!-- Подключаем Quill Editor -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script>
+        const quill = new Quill('#editor-container', {
+            modules: { toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block'],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['clean']
+            ]},
+            theme: 'snow'
+        });
+
+        let posts = [];
+
+        // Загрузка существующих статей
+        async function loadPosts() {
+            const response = await fetch('/blog/posts.json');
+            posts = await response.json();
+            renderPostList();
+        }
+
+        // Отображение списка статей
+        function renderPostList() {
+            const list = document.getElementById('postList');
+            list.innerHTML = posts.map(post => `
+                <div class="post-item">
+                    <span>${post.title}</span>
+                    <div>
+                        <button onclick="editPost('${post.id}')">✎</button>
+                        <button onclick="deletePost('${post.id}')">🗑</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Редактирование статьи
+        async function editPost(id) {
+            const post = posts.find(p => p.id === id);
+            const response = await fetch(post.contentPath);
+            const content = await response.text();
+            
+            document.getElementById('postId').value = id;
+            document.getElementById('postTitle').value = post.title;
+            document.getElementById('postCategory').value = post.category;
+            quill.root.innerHTML = content;
+        }
+
+        // Удаление статьи
+        async function deletePost(id) {
+            posts = posts.filter(p => p.id !== id);
+            await savePosts();
+            loadPosts();
+        }
+
+        // Сохранение статей
+        async function savePost() {
+            const post = {
+                id: document.getElementById('postId').value || Date.now().toString(),
+                title: document.getElementById('postTitle').value,
+                category: document.getElementById('postCategory').value,
+                date: new Date().toISOString(),
+                content: quill.root.innerHTML,
+                image: await handleImageUpload()
+            };
+
+            // Сохранение в JSON
+            if(!posts.find(p => p.id === post.id)) {
+                posts.push(post);
+            }
+            
+            await savePosts();
+            await generateHtml(post);
+            loadPosts();
+        }
+
+        // Генерация HTML
+        async function generateHtml(post) {
+            const html = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>${post.title}</title>
+                    <!-- Стили сайта -->
+                </head>
+                <body>
+                    ${post.content}
+                </body>
+                </html>
+            `;
+
+            // Сохранение файла
+            const filename = `post_${post.id}.html`;
+            await fetch('/save-article', {
+                method: 'POST',
+                body: JSON.stringify({filename, content: html})
+            });
+        }
+
+        loadPosts();
+    </script>
+</body>
+</html>
